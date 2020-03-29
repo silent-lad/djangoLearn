@@ -1,0 +1,19 @@
+{% for hospital in hospitals %}
+<article class="media content-section">
+  <img
+    class="rounded-circle article-img"
+    src="{{ hospital.author.profile.image.url }}"
+  />
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ hospital.name }}</a>
+      <small class="text-muted">{{ hospital.city" }}</small>
+    </div>
+    <h2>
+      <a class="article-title" href="{% url 'hospital-detail' hospital.id %}"
+        >{{ hospital.map_url }}</a
+      >
+    </h2>
+  </div>
+</article>
+{% endfor %}

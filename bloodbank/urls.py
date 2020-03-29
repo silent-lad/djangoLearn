@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from bloodbankapp import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('bloodbankapp.urls')),
     path('admin/', admin.site.urls),
+    path('register/', views.register, name='register'),
     path('loginUser', auth_views.LoginView.as_view(template_name='bloodbankapp/login.html'),
          name='loginUser'),
     path('loginAdmin', auth_views.LoginView.as_view(template_name='bloodbankapp/login.html'),
