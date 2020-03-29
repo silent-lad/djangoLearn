@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('bloodbankapp.urls')),
     path('admin/', admin.site.urls),
+    path('loginUser', auth_views.LoginView.as_view(template_name='bloodbankapp/login.html'),
+         name='loginUser'),
+    path('loginAdmin', auth_views.LoginView.as_view(template_name='bloodbankapp/login.html'),
+         name='loginAdmin'),
+    path('logout', auth_views.LogoutView.as_view(template_name='bloodbankapp/logout.html'),
+         name='logoutUser'),
 ]

@@ -15,7 +15,15 @@ hospitals = [
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the admin portal index.")
+    return render(request, 'bloodbankapp/index.html')
+
+
+def loginAdmin(request):
+    return render(request, 'bloodbankapp/login.html', {'userType': 'admin'})
+
+
+def loginUser(request):
+    return render(request, 'bloodbankapp/login.html', {'userType': 'user'})
 
 
 def test(request):
