@@ -18,6 +18,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('adminportal/', include('bloodbankadmin.urls')),
-    path('portal/', include('bloodbankuser.urls')),
     path('admin/', admin.site.urls),
 ]
