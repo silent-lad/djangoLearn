@@ -89,40 +89,41 @@ class HospitalCreateView(LoginRequiredMixin, CreateView):
     fields = ['name', 'city', 'map_url']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
         return super().form_valid(form)
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user.username == 'blooddonation.app0@gmail.com':
-            return True
-        return False
+    # def test_func(self):
+    #     post = self.get_object()
+    #     # if self.request.user.username == 'blooddonation.app0@gmail.com':
+    #     return True
+        # return False
 
 
 class HospitalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Hospital
-    fields = ['title', 'content']
+    fields = ['city', 'name', 'map_url']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        # form.instance.user = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user.username == 'blooddonation.app0@gmail.com':
+        # hospital = self.get_object()
+        return True
+        if self.request.user.email == 'blooddonation.app0@gmail.com':
             return True
         return False
 
 
 class HospitalDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Hospital
-    success_url = '/'
+    success_url = '/hospitals'
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user.username == 'blooddonation.app0@gmail.com':
-            return True
-        return False
+        return True
+        # if self.request.user.username == 'blooddonation.app0@gmail.com':
+        # return True
+        # return False
 
 
 def index(request):
@@ -137,9 +138,9 @@ def loginUser(request):
     return render(request, 'bloodbankapp/login.html', {'userType': 'user'})
 
 
-def test(request):
-    context = {
-        'hospitals': hospitals,
-        'title': 'Hospitals'
-    }
-    return render(request, 'bloodbankapp/dashboard.html', context)
+# def test(request):
+#     context = {
+#         'hospitals': hospitals,
+#         'title': 'Hospitals'
+#     }
+#     return render(request, 'bloodbankapp/dashboard.html', context)

@@ -1,19 +1,24 @@
-{% for hospital in hospitals %}
-<article class="media content-section">
-  <img
-    class="rounded-circle article-img"
-    src="{{ hospital.author.profile.image.url }}"
-  />
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{ hospital.name }}</a>
-      <small class="text-muted">{{ hospital.city" }}</small>
+{% extends "bloodbankapp/dashboard.html" %} {% block panelcontent %} {% load
+static %}
+<div class="main-content">
+  {% for hospital in hospitals %}
+  <div class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ hospital.name }}</a>
+        <small class="text-muted">{{ hospital.city }}</small>
+      </div>
+      <h2>
+        <a class="article-title">{{ hospital.map_url }}</a>
+        <a class="article-title" href="{% url 'hospital-delete' hospital.id %}"
+          >Delete</a
+        >
+        <a class="article-title" href="{% url 'hospital-update' hospital.id %}"
+          >Update</a
+        >
+      </h2>
     </div>
-    <h2>
-      <a class="article-title" href="{% url 'hospital-detail' hospital.id %}"
-        >{{ hospital.map_url }}</a
-      >
-    </h2>
   </div>
-</article>
-{% endfor %}
+  {% endfor %}
+</div>
+{% endblock panelcontent %}

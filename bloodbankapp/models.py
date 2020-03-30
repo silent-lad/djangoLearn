@@ -33,6 +33,9 @@ class Hospital(models.Model):
     map_url = models.TextField()
     city = models.TextField()
 
+    def get_absolute_url(self):
+        return '/hospitals'
+
 
 class Appointment(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
