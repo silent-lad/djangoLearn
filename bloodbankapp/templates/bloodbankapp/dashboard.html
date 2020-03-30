@@ -43,47 +43,54 @@
         </a>
       </section>
       <span class="break"></span>
-
+      {% if "user.email" == "bloodbank.app0@gmail.com"%}
       <div class="nav">
         <a
-          to="/manage_members"
+          href="{% url 'profile-update' user.profile.id %}"
           :class="{active: activePageId === '/manage_members'}"
           ><i class="fa fa-user text-info" aria-hidden="true"></i> Manage
-          Residents</a
+          Profile</a
         >
         <a
-          to="/manage_serviceperson"
+          href="{% url 'appointment-list'%}"
           :class="{active: activePageId === '/manage_serviceperson'}"
-          ><i class="fa fa-cogs text-danger" aria-hidden="true"></i> Manage
-          Servicemen
+          ><i class="fa fa-cogs text-danger" aria-hidden="true"></i> My
+          Appointments
         </a>
         <span class="break"></span>
         <span class="break"></span>
-        <a to="/complaints" :class="{active: activePageId === '/complaints'}"
-          ><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-          Complaints</a
-        >
-        <!-- <a href="dashboard/complaints" :class="{active: activePageId === 'Complaints'}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Complaints </a> -->
         <a
-          to="/notifications"
-          :class="{active: activePageId === '/notifications'}"
-          ><i class="fa fa-podcast" aria-hidden="true"></i> Notifications
-        </a>
-        <a to="/payments" :class="{active: activePageId === '/payments'}"
-          ><i class="fa fa-inr text-warning" aria-hidden="true"></i> Payments
-        </a>
-        <a to="/visitors" :class="{active: activePageId === '/visitors'}"
-          ><i class="fa fa-id-badge text-success" aria-hidden="true"></i>
-          Visitors
-        </a>
+          href="{% url 'hospital-list'%}"
+          :class="{active: activePageId === '/complaints'}"
+          ><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Close
+          Hospitals</a
+        >
       </div>
-      <div class="bottom text-center text-white">
+      {% else %}
+      <div class="nav">
+        <a
+          href="{% url 'hospital-create' %}"
+          :class="{active: activePageId === '/manage_serviceperson'}"
+          ><i class="fa fa-cogs text-danger" aria-hidden="true"></i> Add
+          Hospitals
+        </a>
+        <span class="break"></span>
+        <span class="break"></span>
+        <a
+          href="{% url 'hospital-list'%}"
+          :class="{active: activePageId === '/complaints'}"
+          ><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Manage
+          Hospitals</a
+        >
+      </div>
+      {% endif %}
+      <!-- <div class="bottom text-center text-white">
         <span class="small">Powered by</span>
         <span class="break"></span>
         <img src="../assets/img/suvidha-logo-white.png" height="45px" />
         <span class="break"></span>
         <span class="break"></span>
-      </div>
+      </div> -->
     </div>
     <!-- End sidebar -->
 
@@ -93,12 +100,5 @@
     </div>
     <div id="spotlight_back"></div>
   </div>
-  <script>
-    $(function() {
-      $(".datetime-input").datetimepicker({
-        format: "YYYY-MM-DD HH:mm:ss"
-      });
-    });
-  </script>
 </body>
 {% endblock content %}

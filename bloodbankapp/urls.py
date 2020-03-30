@@ -11,6 +11,7 @@ from .views import (
     AppointmentListView,
     AppointmentDeleteView,
     AppointmentCreateView,
+    AppointmentUpdateView,
 
     ProfileUpdateView
 )
@@ -39,6 +40,9 @@ urlpatterns = [
     # Appointment Views
     path('appointments', login_required(
         AppointmentListView.as_view()), name='appointment-list'),
+
+    path('appointment/update/<int:pk>', login_required(
+        AppointmentUpdateView.as_view()), name='appointment-edit'),
 
     path('appointment/new/<int:hospitalid>', login_required(AppointmentCreateView.as_view()),
          name='appointment-create'),

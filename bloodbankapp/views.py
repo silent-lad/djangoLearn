@@ -173,6 +173,26 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
         return False
 
 
+class AppointmentUpdateView(LoginRequiredMixin, CreateView):
+    model = Appointment
+    form_class = AppointmentForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        hospitalid = self.kwargs['hospitalid']
+        form.instance.hospital = Hospital.objects.filter(id=hospitalid).first()
+        return super().form_valid(form)
+
+    def test_func(self):
+        appointment = self.get_object()
+        if appointment.user == self.request.user:
+            return True
+        # post = self.get_object()
+        # if self.request.user.username == 'blooddonation.app0@gmail.com':
+        # return True
+        return False
+
+
 class AppointmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Appointment
     success_url = '/appointments'
