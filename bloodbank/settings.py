@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'bloodbank.wsgi.application'
 
 # Login/Logout conf"ig
 LOGIN_REDIRECT_URL = 'profile'
-LOGIN_URL = ''
-LOGOUT_REDIRECT_URL = ''
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Database

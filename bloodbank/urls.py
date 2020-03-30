@@ -27,5 +27,5 @@ urlpatterns = [
     path('loginAdmin', auth_views.LoginView.as_view(template_name='bloodbankapp/login.html'),
          name='loginAdmin'),
     path('logout', auth_views.LogoutView.as_view(template_name='bloodbankapp/logout.html'),
-         name='logoutUser'),
+         name='logout'),
 ]

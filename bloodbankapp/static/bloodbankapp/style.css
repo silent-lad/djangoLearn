@@ -17,12 +17,12 @@ select {
 ::-moz-selection {
   /* Code for Firefox */
   color: white;
-  background: #0069ff;
+  background: #ff1b2e70;
 }
 
 ::selection {
   color: white;
-  background: #0069ff;
+  background: #ff1b2e70;
 }
 
 /** {background-color: rgba(105, 78, 0, 0.1);border: 1px solid #eeeeee05;}
@@ -59,8 +59,8 @@ body {
 .gradient {
   background-image: linear-gradient(
     to right bottom,
-    rgba(12, 104, 224, 0.85),
-    rgba(6, 58, 117, 0.85)
+    rgba(224, 12, 23, 0.85),
+    rgba(117, 6, 24, 0.85)
   );
 }
 
@@ -171,7 +171,7 @@ body {
 .sidebar .brand-logo::after {
   content: "";
   position: absolute;
-  border: 1px solid #5163ad;
+  border: 1px solid #ad5151;
   left: 20px;
   right: 20px;
 }
@@ -187,8 +187,8 @@ body {
 }
 
 .sidebar .nav > a.active {
-  border-color: #2787f7;
-  background-color: #2946bb;
+  border-color: #f72727;
+  background-color: #bb2929;
   color: white;
 }
 
@@ -200,7 +200,7 @@ body {
 
 .sidebar .nav > .active:hover,
 .sidebar .nav > .active:focus {
-  background-color: #2946bb;
+  background-color: #bb2929;
 }
 
 .sidebar .nav > a .i,
@@ -231,7 +231,7 @@ body {
 .sidebar .bottom::before {
   content: "";
   position: absolute;
-  border: 1px solid #5163ad;
+  border: 1px solid #ad5151;
   left: 20px;
   right: 20px;
   top: -10px;
@@ -322,7 +322,7 @@ hr {
 }
 */
 .tabbed-card > .header .active {
-  border-bottom: 2px solid #0069ff;
+  border-bottom: 2px solid #ff1b2e70;
 }
 
 .tabbed-card .content {
@@ -1000,11 +1000,11 @@ table thead th {
 .container .info span .fa {
   color: #ef3b3a;
 }
-body {
+body.logingScreen {
   background: -moz-linear-gradient(
     45deg,
-    #2436ff 0%,
-    #1b3680 100%
+    #ff2424 0%,
+    #801b1b 100%
   ); /* ff3.6+ */
   background: -webkit-gradient(
     linear,
@@ -1015,17 +1015,17 @@ body {
   ); /* safari4+,chrome */
   background: -webkit-linear-gradient(
     45deg,
-    #2436ff 0%,
-    #1b3680 100%
+    #ff2424 0%,
+    #801b1b 100%
   ); /* safari5.1+,chrome10+ */
   background: -o-linear-gradient(
     45deg,
-    #2436ff 0%,
-    #1b3680 100%
+    #ff2424 0%,
+    #801b1b 100%
   ); /* opera 11.10+ */
   background: -ms-linear-gradient(45deg, #2436ff 0%, #1b3680 100%); /* ie10+ */
   background: linear-gradient(45deg, #2436ff 0%, #1b3680 100%); /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1B3680', endColorstr='#2436FF',GradientType=1 ); /* ie6-9 */
+  /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1B3680', endColorstr='#2436FF',GradientType=1 ); ie6-9 */
 }
 
 .small-white-spinner {
