@@ -47,7 +47,7 @@ class AppointmentAddForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ['hospital', 'user', 'start_time']
+        fields = ['hospital', 'user']
 
 
 class AppointmentUpdateForm(forms.ModelForm):
@@ -55,7 +55,7 @@ class AppointmentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ['hospital', 'user', 'start_time']
+        fields = ['hospital', 'user']
 
 
 class ProfileUpdateForm(forms.ModelForm):

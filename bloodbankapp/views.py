@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from django import forms
 from django.http import HttpResponse
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileCreateForm
 from django.contrib.auth.decorators import login_required
@@ -13,16 +14,6 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Hospital, Appointment
-
-hospitals = [
-    {
-        'name': 'Daryaganj'
-    }, {
-        'name': 'GTB'
-    }, {
-        'name': 'MCD'
-    }
-]
 
 
 def register(request):
@@ -100,6 +91,7 @@ class HospitalCreateView(LoginRequiredMixin, CreateView):
 
 class HospitalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Hospital
+    email = forms.EmailField()
     fields = ['city', 'name', 'map_url']
 
     def form_valid(self, form):
@@ -117,6 +109,77 @@ class HospitalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class HospitalDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Hospital
     success_url = '/hospitals'
+
+    def test_func(self):
+        post = self.get_object()
+        return True
+        # if self.request.user.username == 'blooddonation.app0@gmail.com':
+        # return True
+        # return False
+
+
+class AppointmentListView(ListView):
+    model = Appointment
+    template_name = 'bloodbankapp/appointments.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'appointments'
+
+
+class AppointmentDetailView(DetailView):
+    model = Appointment
+
+
+class AppointmentForm(forms.ModelForm):
+    time = forms.DateTimeField(
+        label='Start',
+        widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
+    )
+
+    class Meta:
+        model = Appointment
+        fields = ['time']
+
+
+class AppointmentCreateView(LoginRequiredMixin, CreateView):
+    model = Appointment
+    form_class = AppointmentForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        # if self.request.user.username == 'blooddonation.app0@gmail.com':
+        return True
+        return False
+
+
+class AppointmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Appointment
+    fields = ['time']
+
+    def get_form(self):
+        '''add date picker in forms'''
+        from django.forms.widgets import SelectDateWidget, DateTimeInput
+        form = super(AppointmentCreateView, self).get_form()
+        form.fields['time'].widget = DateTimeInput()
+        return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        # hospital = self.get_object()
+        return True
+        if self.request.user.email == 'blooddonation.app0@gmail.com':
+            return True
+        return False
+
+
+class AppointmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Appointment
+    success_url = '/appointments'
 
     def test_func(self):
         post = self.get_object()

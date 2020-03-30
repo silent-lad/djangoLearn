@@ -41,4 +41,4 @@ class Appointment(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
-    start_time = models.DateTimeField()
+    time = models.DateTimeField(default='1950-01-01')
