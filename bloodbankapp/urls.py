@@ -12,7 +12,8 @@ from .views import (
 urlpatterns = [
     path('', views.index, name='index'),
     path('test', views.test, name='test'),
-    path('', HospitalListView.as_view(), name='blog-home'),
+    path('profile', views.profile, name='profile'),
+    # path('', HospitalListView.as_view(), name='blog-home'),
     path('hospital/<int:pk>/', HospitalDetailView.as_view(), name='hospital-detail'),
     path('hospital/new/', HospitalCreateView.as_view(), name='hospital-create'),
     path('hospital/<int:pk>/update/',

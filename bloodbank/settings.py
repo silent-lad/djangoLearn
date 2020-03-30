@@ -51,6 +51,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+FIXTURE_DIRS = (
+    '/path/to/bloodbankapp/fixtures/',
+)
+
 ROOT_URLCONF = 'bloodbank.urls'
 
 TEMPLATES = [
@@ -70,6 +74,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bloodbank.wsgi.application'
+
+
+# Login/Logout conf"ig
+LOGIN_REDIRECT_URL = 'profile'
+LOGIN_URL = ''
+LOGOUT_REDIRECT_URL = ''
 
 
 # Database
