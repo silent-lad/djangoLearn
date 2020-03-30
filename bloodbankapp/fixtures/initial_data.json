@@ -571,7 +571,7 @@
     "fields": {
       "user": 2,
       "phone": 9643569434,
-      "is_male": true,
+      "gender": 1,
       "age": 34,
       "weight": 56,
       "bloodGroup": "o"

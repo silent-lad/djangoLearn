@@ -1,0 +1,25 @@
+{% extends "bloodbankapp/dashboard.html" %} {% block panelcontent %} {% load
+static %}
+<div class="main-content">
+  {% for appointment in appointments %}
+  <div class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ appointment.hospital.name }}</a>
+        <small class="text-muted">{{ appointment.user.profile.name }}</small>
+        <small class="text-muted">{{ appointment.date }}</small>
+        <small class="text-muted">{{ appointment.time }}</small>
+      </div>
+      <h2>
+        <a class="article-title">{{ appointment.hospital.map_url }}</a>
+        <a
+          class="article-title"
+          href="{% url 'appointment-delete' appointment.id %}"
+          >Delete</a
+        >
+      </h2>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock panelcontent %}

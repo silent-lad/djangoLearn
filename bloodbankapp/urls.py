@@ -9,10 +9,8 @@ from .views import (
     HospitalDeleteView,
 
     AppointmentListView,
-    AppointmentDetailView,
-    AppointmentCreateView,
-    AppointmentUpdateView,
-    AppointmentDeleteView
+    AppointmentDeleteView,
+    AppointmentCreateView
 )
 
 urlpatterns = [
@@ -28,11 +26,9 @@ urlpatterns = [
          HospitalDeleteView.as_view(), name='hospital-delete'),
 
 
-    path('appointments', AppointmentListView.as_view(), name='hospital-list'),
-    path('appointment/new/', AppointmentCreateView.as_view(
-        success_url="/appointments"), name='appointment-create'),
-    path('appointment/<int:pk>/update/',
-         AppointmentUpdateView.as_view(), name='appointment-update'),
+    path('appointments', AppointmentListView.as_view(), name='appointment-list'),
+    path('appointment/new/<int:hospitalid>', AppointmentCreateView.as_view(),
+         name='appointment-create'),
     path('appointment/<int:pk>/delete/',
          AppointmentDeleteView.as_view(), name='appointment-delete'),
 ]

@@ -14,6 +14,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Hospital, Appointment
+from datetime import datetime
 
 
 def register(request):
@@ -124,19 +125,19 @@ class AppointmentListView(ListView):
     context_object_name = 'appointments'
 
 
-class AppointmentDetailView(DetailView):
-    model = Appointment
-
-
 class AppointmentForm(forms.ModelForm):
-    time = forms.DateTimeField(
-        label='Start',
-        widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
+    time = forms.TimeField(
+        label='Time',
+        widget=forms.widgets.TimeInput(attrs={'type': 'time'}),
+    )
+    date = forms.DateField(
+        label='Date',
+        widget=forms.widgets.DateInput(attrs={'type': 'date'}),
     )
 
     class Meta:
         model = Appointment
-        fields = ['time']
+        fields = ['time', 'date']
 
 
 class AppointmentCreateView(LoginRequiredMixin, CreateView):
@@ -145,35 +146,14 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        hospitalid = self.kwargs['hospitalid']
+        form.instance.hospital = Hospital.objects.filter(id=hospitalid).first()
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
+        # post = self.get_object()
         # if self.request.user.username == 'blooddonation.app0@gmail.com':
-        return True
-        return False
-
-
-class AppointmentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Appointment
-    fields = ['time']
-
-    def get_form(self):
-        '''add date picker in forms'''
-        from django.forms.widgets import SelectDateWidget, DateTimeInput
-        form = super(AppointmentCreateView, self).get_form()
-        form.fields['time'].widget = DateTimeInput()
-        return form
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        # hospital = self.get_object()
-        return True
-        if self.request.user.email == 'blooddonation.app0@gmail.com':
-            return True
+        # return True
         return False
 
 

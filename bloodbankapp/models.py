@@ -9,7 +9,10 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.IntegerField(null=True, blank=True)
-    is_male = models.BooleanField(null=True, blank=True)
+    GENDER_MALE = 0
+    GENDER_FEMALE = 1
+    GENDER_CHOICES = [(GENDER_MALE, 'Male'), (GENDER_FEMALE, 'Female')]
+    gender = models.IntegerField(choices=GENDER_CHOICES, default=0)
     age = models.IntegerField(null=True, blank=True)
     weight = models.IntegerField(null=True, blank=True)
     bloodGroup = models.CharField(max_length=3, null=True, blank=True)
@@ -30,6 +33,8 @@ def save_user_profile(sender, instance, **kwargs):
 class Hospital(models.Model):
     name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
+    working_days = models.CharField(max_length=100, default='Monday-Sunday')
+    working_hours = models.CharField(max_length=100, default='8:00AM-5:00PM')
     map_url = models.TextField()
     city = models.TextField()
 
@@ -41,4 +46,8 @@ class Appointment(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
-    time = models.DateTimeField(default='1950-01-01')
+    date = models.CharField(max_length=100, null=True)
+    time = models.CharField(default='00:00:00', max_length=100, null=True)
+
+    def get_absolute_url(self):
+        return '/appointments'

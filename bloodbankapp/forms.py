@@ -26,45 +26,13 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email']
 
 
-class HospitalAddForm(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = Hospital
-        fields = ['name', 'city', 'map_url']
-
-
-class HospitalUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = Hospital
-        fields = ['name', 'city', 'map_url']
-
-
-class AppointmentAddForm(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = Appointment
-        fields = ['hospital', 'user']
-
-
-class AppointmentUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = Appointment
-        fields = ['hospital', 'user']
-
-
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['phone', 'is_male', 'age', 'weight', 'bloodGroup']
+        fields = ['phone', 'gender', 'age', 'weight', 'bloodGroup']
 
 
 class ProfileCreateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['phone', 'is_male', 'age', 'weight', 'bloodGroup']
+        fields = ['phone', 'gender', 'age', 'weight', 'bloodGroup']
