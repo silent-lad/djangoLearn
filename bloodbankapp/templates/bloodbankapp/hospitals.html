@@ -10,17 +10,20 @@ static %}
       </div>
       <h2>
         <a class="article-title">{{ hospital.map_url }}</a>
+        {% if "user.email" == "bloodbank.app0@gmail.com"%}
         <a class="article-title" href="{% url 'hospital-delete' hospital.id %}"
           >Delete</a
         >
         <a class="article-title" href="{% url 'hospital-update' hospital.id %}"
           >Update</a
         >
+        {% else %}
         <a
           class="article-title"
           href="{% url 'appointment-create' hospital.id %}"
           >Book Appointment</a
         >
+        {% endif %}
       </h2>
     </div>
   </div>

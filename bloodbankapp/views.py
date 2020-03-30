@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Hospital, Appointment
+from .models import Hospital, Appointment, Profile
 from datetime import datetime
 
 
@@ -66,6 +66,22 @@ def profile(request):
     return render(request, 'bloodbankapp/profile.html', context)
 
 
+class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    fields = ['phone', 'gender', 'weight', 'bloodGroup', 'age']
+
+    def form_valid(self, form):
+        # form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        # hospital = self.get_object()
+        return True
+        if self.request.user.email == 'blooddonation.app0@gmail.com':
+            return True
+        return False
+
+
 class HospitalListView(ListView):
     model = Hospital
     template_name = 'bloodbankapp/hospitals.html'  # <app>/<model>_<viewtype>.html
@@ -78,7 +94,7 @@ class HospitalDetailView(DetailView):
 
 class HospitalCreateView(LoginRequiredMixin, CreateView):
     model = Hospital
-    fields = ['name', 'city', 'map_url']
+    fields = ['name', 'city', 'map_url', 'working_days', 'working_hours']
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -93,7 +109,7 @@ class HospitalCreateView(LoginRequiredMixin, CreateView):
 class HospitalUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Hospital
     email = forms.EmailField()
-    fields = ['city', 'name', 'map_url']
+    fields = ['name', 'city', 'map_url', 'working_days', 'working_hours']
 
     def form_valid(self, form):
         # form.instance.user = self.request.user

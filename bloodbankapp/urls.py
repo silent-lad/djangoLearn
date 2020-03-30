@@ -1,5 +1,5 @@
 from django.urls import path, reverse
-
+from django.contrib.auth.decorators import login_required
 from . import views
 from .views import (
     HospitalListView,
@@ -10,25 +10,39 @@ from .views import (
 
     AppointmentListView,
     AppointmentDeleteView,
-    AppointmentCreateView
+    AppointmentCreateView,
+
+    ProfileUpdateView
 )
 
 urlpatterns = [
     path('', views.index, name='index'),
     # path('test', views.test, name='test'),
     path('profile', views.profile, name='profile'),
-    path('hospitals', HospitalListView.as_view(), name='hospital-list'),
-    path('hospital/new/', HospitalCreateView.as_view(
-        success_url="/hospitals"), name='hospital-create'),
+    path('profile/update/<int:pk>', login_required(ProfileUpdateView.as_view()),
+         name='profile-update'),
+
+    # Hospital Views
+    path('hospitals', login_required(
+        HospitalListView.as_view()), name='hospital-list'),
+
+    path('hospital/new/', login_required(HospitalCreateView.as_view(
+        success_url="/hospitals")), name='hospital-create'),
+
     path('hospital/<int:pk>/update/',
-         HospitalUpdateView.as_view(), name='hospital-update'),
+         login_required(HospitalUpdateView.as_view()), name='hospital-update'),
+
     path('hospital/<int:pk>/delete/',
-         HospitalDeleteView.as_view(), name='hospital-delete'),
+         login_required(HospitalDeleteView.as_view()), name='hospital-delete'),
 
 
-    path('appointments', AppointmentListView.as_view(), name='appointment-list'),
-    path('appointment/new/<int:hospitalid>', AppointmentCreateView.as_view(),
+    # Appointment Views
+    path('appointments', login_required(
+        AppointmentListView.as_view()), name='appointment-list'),
+
+    path('appointment/new/<int:hospitalid>', login_required(AppointmentCreateView.as_view()),
          name='appointment-create'),
+
     path('appointment/<int:pk>/delete/',
-         AppointmentDeleteView.as_view(), name='appointment-delete'),
+         login_required(AppointmentDeleteView.as_view()), name='appointment-delete'),
 ]
