@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileCreateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -28,7 +29,17 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.age = form.cleaned_data.get('age')
+            user.profile.email = form.cleaned_data.get('email')
+            user.profile.phone = form.cleaned_data.get('phone')
+            user.profile.bloodGroup = form.cleaned_data.get('bloodGroup')
+            user.profile.weight = form.cleaned_data.get('weight')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
             username = form.cleaned_data.get('username')
             messages.success(
                 request, f'Your account has been created! You are now able to log in')
@@ -38,7 +49,7 @@ def register(request):
     return render(request, 'bloodbankapp/register.html', {'form': form})
 
 
-@login_required
+# @login_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
