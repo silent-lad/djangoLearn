@@ -75,11 +75,7 @@ class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        # hospital = self.get_object()
         return True
-        if self.request.user.email == 'blooddonation.app0@gmail.com':
-            return True
-        return False
 
 
 class HospitalListView(ListView):

@@ -921,10 +921,36 @@ table thead th {
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-  text-align: center;
+  /* text-align: center; */
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+.form.dashboard {
+  max-width: 100vw !important;
+  width: 100% !important;
+  /* margin: 0 !important; */
+}
+
 .form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form legend {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  font-size: 35px;
+  color: #fc4040;
+  font-weight: 600;
+  text-align: center;
+}
+.form textarea {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -939,7 +965,7 @@ table thead th {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: blue;
+  background: rgb(255, 50, 50);
   width: 100%;
   border: 0;
   padding: 15px;
