@@ -1,4 +1,31 @@
 {% extends "bloodbankapp/dashboard.html" %} {% block panelcontent %} {% load
 static %}
-<div class="main-content"></div>
+<div class="main-content">
+  <div class="form dashboard card text-white mb-3">
+    <div class="card-header bg-primary"><h1>Information</h1></div>
+    <div class="card-body">
+      <h5 class="card-title text-primary">Notes before donating:</h5>
+      <ul class="text-dark">
+        <li>
+          The donor must be in a good health condition in order to donate.
+        </li>
+        <li>Age between 18 to 60 years.</li>
+        <li>Weight must be above 50 kg.</li>
+        <li>Haemoglobin level at least 12 g/dl.</li>
+        <li>
+          Avoid donating if you have been through any proceasure, injection,
+          peircing or tatto recently.
+        </li>
+        <li>You must not be pregnant or breastfeeding.</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <p class="text-dark">
+        This application is meant for booking donation purposes. For individuals
+        suggestions and questions, and hospitals requests, Kindly Email us at:
+      </p>
+      <p class="text-primary">blooddonation.app0@gmail.com</p>
+    </div>
+  </div>
+</div>
 {% endblock panelcontent %}
