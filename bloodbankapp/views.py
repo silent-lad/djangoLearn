@@ -140,6 +140,9 @@ class AppointmentListView(ListView):
     template_name = 'bloodbankapp/appointments.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'appointments'
 
+    def get_queryset(self):
+        return Appointment.objects.filter(user=self.request.user)
+
 
 class AppointmentForm(forms.ModelForm):
     time = forms.TimeField(

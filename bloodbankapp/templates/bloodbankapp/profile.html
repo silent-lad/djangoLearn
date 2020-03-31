@@ -2,5 +2,10 @@
 static %} {% load crispy_forms_tags %}
 <div class="main-content">
   <h1>{{user.profile.id}}</h1>
+  {% if request.user.username == 'blooddonation.app0@gmail.com' %}
+  <h1>{{ request.user.username }}, if</h1>
+  {% else %}
+  <h1>{{ user.username }}, else</h1>
+  {% endif %}
 </div>
 {% endblock panelcontent %}

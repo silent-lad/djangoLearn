@@ -10,7 +10,7 @@ static %}
       </div>
       <h2>
         <a class="article-title">{{ hospital.map_url }}</a>
-        {% if "user.email" == "bloodbank.app0@gmail.com"%}
+        {% if request.user.username == 'blooddonation.app0@gmail.com' %}
         <a class="article-title" href="{% url 'hospital-delete' hospital.id %}"
           >Delete</a
         >
