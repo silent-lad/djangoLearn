@@ -2,27 +2,29 @@
 static %}
 <div class="main-content">
   {% for appointment in appointments %}
-  <div class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">{{ appointment.hospital.name }}</a>
-        <small class="text-muted">{{ appointment.user.profile.name }}</small>
-        <small class="text-muted">{{ appointment.date }}</small>
-        <small class="text-muted">{{ appointment.time }}</small>
-      </div>
-      <h2>
-        <a class="article-title">{{ appointment.hospital.map_url }}</a>
-        <a
-          class="article-title"
-          href="{% url 'appointment-delete' appointment.id %}"
-          >Delete</a
-        >
-        <a
-          class="article-title"
-          href="{% url 'appointment-edit' appointment.id %}"
-          >Edit</a
-        >
-      </h2>
+  <div class="card mb-3 border-danger">
+    <div class="card-header bg-danger text-white">
+      <h3>{{ appointment.hospital.name }}</h3>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Hospital City: {{ appointment.hospital.city }}</h5>
+      <h5 class="card-title">Date: {{ appointment.date }}</h5>
+      <h5 class="card-title">Time: {{ appointment.time }}</h5>
+    </div>
+    <div class="card-footer text-center">
+      <a href="{{ appointment.hospital.map_url }}" class="btn btn-primary"
+        >Google Maps</a
+      >
+      <a
+        class="btn btn-primary"
+        href="{% url 'appointment-delete' appointment.id %}"
+        >Delete</a
+      >
+      <a
+        class="btn btn-primary"
+        href="{% url 'appointment-edit' appointment.id %}"
+        >Edit</a
+      >
     </div>
   </div>
   {% endfor %}

@@ -2,29 +2,27 @@
 static %}
 <div class="main-content">
   {% for hospital in hospitals %}
-  <div class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">{{ hospital.name }}</a>
-        <small class="text-muted">{{ hospital.city }}</small>
-      </div>
-      <h2>
-        <a class="article-title">{{ hospital.map_url }}</a>
-        {% if request.user.username == 'blooddonation.app0@gmail.com' %}
-        <a class="article-title" href="{% url 'hospital-delete' hospital.id %}"
-          >Delete</a
-        >
-        <a class="article-title" href="{% url 'hospital-update' hospital.id %}"
-          >Update</a
-        >
-        {% else %}
-        <a
-          class="article-title"
-          href="{% url 'appointment-create' hospital.id %}"
-          >Book Appointment</a
-        >
-        {% endif %}
-      </h2>
+  <div class="card mb-3">
+    <div class="card-header bg-danger text-white">
+      <h3>{{ hospital.name }}</h3>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">City: {{ hospital.city }}</h5>
+      <a href="{{ hospital.map_url }}" class="btn btn-primary">Google Maps</a>
+      {% if request.user.username == 'blooddonation.app0@gmail.com' %}
+      <a class="btn btn-primary" href="{% url 'hospital-delete' hospital.id %}"
+        >Delete</a
+      >
+      <a class="btn btn-primary" href="{% url 'hospital-update' hospital.id %}"
+        >Update</a
+      >
+      {% else %}
+      <a
+        class="btn btn-primary"
+        href="{% url 'appointment-create' hospital.id %}"
+        >Book Appointment</a
+      >
+      {% endif %}
     </div>
   </div>
   {% endfor %}

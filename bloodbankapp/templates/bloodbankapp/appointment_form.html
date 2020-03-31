@@ -12,6 +12,12 @@ static %} {% load crispy_forms_tags %}
         {% endif %} {{ form|crispy }}
       </fieldset>
       <div class="form-group">
+        <p class="information">
+          Hospital Name: {{ hospital.name }}
+        </p>
+        <p class="information">
+          Hospital City: {{ hospital.city }}
+        </p>
         {% if object %}
         <button class="btn btn-outline-info" type="submit">Update</button>
         {% else %}

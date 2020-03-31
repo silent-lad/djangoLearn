@@ -18,6 +18,7 @@ from .views import (
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('information', views.informationView, name='information'),
     # path('test', views.test, name='test'),
     path('profile', views.profile, name='profile'),
     path('profile/update/<int:pk>', login_required(ProfileUpdateView.as_view()),

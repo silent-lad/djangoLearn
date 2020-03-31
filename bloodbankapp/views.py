@@ -79,7 +79,7 @@ class LoginAdminForm(forms.ModelForm):
 
 class LoginAdminView(FormView):
     context_object_name = 'login_admin'
-    template_name = 'bloodbank/login.html'
+    template_name = 'bloodbank/login_admin.html'
     model = User
     form_class = LoginAdminForm
 
@@ -98,6 +98,10 @@ class LoginAdminView(FormView):
                 return HttpResponseRedirect('/loginAdmin')
         else:
             return HttpResponseRedirect('/loginAdmin')
+
+
+def informationView(request):
+    return render(request, "bloodbankapp/information.html")
 
 
 class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -198,6 +202,13 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
         hospitalid = self.kwargs['hospitalid']
         form.instance.hospital = Hospital.objects.filter(id=hospitalid).first()
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        hospitalid = self.kwargs['hospitalid']
+        new_context_entry = Hospital.objects.filter(id=hospitalid).first()
+        context["hospital"] = new_context_entry
+        return context
 
     def test_func(self):
         # post = self.get_object()
