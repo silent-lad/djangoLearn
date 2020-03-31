@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileCreateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -11,9 +12,10 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
+    FormView
 )
-from .models import Hospital, Appointment, Profile
+from .models import Hospital, Appointment, Profile, User
 from datetime import datetime
 
 
@@ -64,6 +66,38 @@ def profile(request):
     }
 
     return render(request, 'bloodbankapp/profile.html', context)
+
+
+class LoginAdminForm(forms.ModelForm):
+    username = forms.TextInput()
+    password = forms.HiddenInput()
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+
+class LoginAdminView(FormView):
+    context_object_name = 'login_admin'
+    template_name = 'bloodbank/login.html'
+    model = User
+    form_class = LoginAdminForm
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        if username == 'blooddonation.app0@gmail.com':
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/hospitals')
+                else:
+                    return HttpResponse("Inactive user.")
+            else:
+                return HttpResponseRedirect('/loginAdmin')
+        else:
+            return HttpResponseRedirect('/loginAdmin')
 
 
 class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

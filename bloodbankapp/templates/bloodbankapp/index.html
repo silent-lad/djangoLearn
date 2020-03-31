@@ -6,10 +6,10 @@
         <div class="form">
 
             <form class="login-form" v-on:submit.prevent>
-                
-                <button> <a href="{% url 'loginUser' %}">Login as User </a></button>
+                <h2 class="text-center text-danger">Welcome to Blood Donation Portal</h2>
+                <button class="my-5"> <a style="text-decoration: none;color:white" href="{% url 'loginUser' %}">Login as User </a></button>
                 <br>
-                <button><a href="{% url 'loginAdmin' %}">Login as Admin </a></button>
+                <button ><a style="text-decoration: none;color:white" href="{% url 'loginAdmin' %}">Login as Admin </a></button>
                 <!--  <p class="message">Not registered? <router-link to="/signup">Create an account</router-link> -->
                 <!-- </p> -->
             </form>

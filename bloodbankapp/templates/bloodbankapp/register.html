@@ -3,17 +3,17 @@
 {% load crispy_forms_tags %}
   
 <body class="logingScreen">
-<div class="login-page">
-    <div class="form">
+<div class="login-page" style="width:70vw;">
+    <div class="form dashboard" style="margin-bottom:0;">
 
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
+                <legend class="border-bottom mb-4">Register</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+                <button class="btn btn-outline-info" type="submit">Register</button>
             </div>
         </form>
         <div class="border-top pt-3">

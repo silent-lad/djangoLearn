@@ -978,7 +978,7 @@ table thead th {
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: #1d379a;
+  background: #970000;
 }
 .form .message {
   margin: 15px 0 0;
@@ -1026,7 +1026,10 @@ table thead th {
 .container .info span .fa {
   color: #ef3b3a;
 }
+
 body.logingScreen {
+  padding-bottom: 20px;
+  min-height: 100vh;
   background: -moz-linear-gradient(
     45deg,
     #ff2424 0%,
@@ -1036,8 +1039,8 @@ body.logingScreen {
     linear,
     left bottom,
     right top,
-    color-stop(0%, #2436ff),
-    color-stop(100%, #1b3680)
+    color-stop(0%, #ff2424),
+    color-stop(100%, #801b1b)
   ); /* safari4+,chrome */
   background: -webkit-linear-gradient(
     45deg,
@@ -1049,8 +1052,8 @@ body.logingScreen {
     #ff2424 0%,
     #801b1b 100%
   ); /* opera 11.10+ */
-  background: -ms-linear-gradient(45deg, #2436ff 0%, #1b3680 100%); /* ie10+ */
-  background: linear-gradient(45deg, #2436ff 0%, #1b3680 100%); /* w3c */
+  background: -ms-linear-gradient(45deg, #ff2424 0%, #801b1b 100%); /* ie10+ */
+  background: linear-gradient(45deg, #ff2424 0%, #801b1b 100%); /* w3c */
   /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1B3680', endColorstr='#2436FF',GradientType=1 ); ie6-9 */
 }
 
