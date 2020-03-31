@@ -77,7 +77,7 @@
         <a
           href="{% url 'appointment-list'%}"
           :class="{active: activePageId === '/manage_serviceperson'}"
-          ><i class="fa fa-cogs text-danger" aria-hidden="true"></i> My
+          ><i class="fa fa-cogs text-primary" aria-hidden="true"></i> My
           Appointments
         </a>
         <span class="break"></span>
@@ -85,8 +85,13 @@
         <a
           href="{% url 'hospital-list'%}"
           :class="{active: activePageId === '/complaints'}"
-          ><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Close
-          Hospitals</a
+          ><i class="fa fa-h-square" aria-hidden="true"></i> Close Hospitals</a
+        >
+        <a
+          href="{% url 'information'%}"
+          :class="{active: activePageId === '/complaints'}"
+          ><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          Information</a
         >
       </div>
 

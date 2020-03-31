@@ -1,28 +1,32 @@
 {% extends "bloodbankapp/dashboard.html" %} {% block panelcontent %} {% load
 static %}
 <div class="main-content">
+  <h1>Hospitals</h1>
   {% for hospital in hospitals %}
-  <div class="card mb-3">
+  <div class="card border-danger mb-3">
     <div class="card-header bg-danger text-white">
       <h3>{{ hospital.name }}</h3>
     </div>
     <div class="card-body">
       <h5 class="card-title">City: {{ hospital.city }}</h5>
-      <a href="{{ hospital.map_url }}" class="btn btn-primary">Google Maps</a>
+      <h5 class="card-title">Working Days: {{ hospital.working_days }}</h5>
+      <h5 class="card-title">Working Hours: {{ hospital.working_hours }}</h5>
+    </div>
+    <div class="card-footer">
       {% if request.user.username == 'blooddonation.app0@gmail.com' %}
-      <a class="btn btn-primary" href="{% url 'hospital-delete' hospital.id %}"
+      <a class="btn btn-warning" href="{% url 'hospital-update' hospital.id %}"
+        >Edit</a
+      >
+      <a class="btn btn-danger" href="{% url 'hospital-delete' hospital.id %}"
         >Delete</a
       >
-      <a class="btn btn-primary" href="{% url 'hospital-update' hospital.id %}"
-        >Update</a
-      >
+
       {% else %}
-      <a
-        class="btn btn-primary"
-        href="{% url 'appointment-create' hospital.id %}"
+      <a class="btn btn-info" href="{% url 'appointment-create' hospital.id %}"
         >Book Appointment</a
       >
       {% endif %}
+      <a href="{{ hospital.map_url }}" class="btn btn-primary">Google Maps</a>
     </div>
   </div>
   {% endfor %}

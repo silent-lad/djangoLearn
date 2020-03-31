@@ -1,6 +1,7 @@
 {% extends "bloodbankapp/dashboard.html" %} {% block panelcontent %} {% load
 static %}
 <div class="main-content">
+  <h1>Appointments</h1>
   {% for appointment in appointments %}
   <div class="card mb-3 border-danger">
     <div class="card-header bg-danger text-white">
@@ -11,19 +12,19 @@ static %}
       <h5 class="card-title">Date: {{ appointment.date }}</h5>
       <h5 class="card-title">Time: {{ appointment.time }}</h5>
     </div>
-    <div class="card-footer text-center">
-      <a href="{{ appointment.hospital.map_url }}" class="btn btn-primary"
-        >Google Maps</a
+    <div class="card-footer">
+      <a
+        class="btn btn-warning"
+        href="{% url 'appointment-edit' appointment.id %}"
+        >Edit</a
       >
       <a
-        class="btn btn-primary"
+        class="btn btn-danger"
         href="{% url 'appointment-delete' appointment.id %}"
         >Delete</a
       >
-      <a
-        class="btn btn-primary"
-        href="{% url 'appointment-edit' appointment.id %}"
-        >Edit</a
+      <a href="{{ appointment.hospital.map_url }}" class="btn btn-primary"
+        >Google Maps</a
       >
     </div>
   </div>
