@@ -925,6 +925,14 @@ table thead th {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+.controls > ul > li {
+  color: red !important;
+}
+.controls > ul {
+  border: 1px solid red !important;
+  border-radius: 5px !important;
+  padding: 10px 40px;
+}
 .form.dashboard {
   max-width: 100vw !important;
   width: 100% !important;

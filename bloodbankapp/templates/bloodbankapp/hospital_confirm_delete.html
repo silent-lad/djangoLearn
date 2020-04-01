@@ -5,7 +5,7 @@ static %} {% load crispy_forms_tags %}
     <form method="POST">
       {% csrf_token %}
       <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Delete Post</legend>
+        <legend class="border-bottom mb-4">Delete Hospital</legend>
         <h2>
           Are you sure you want to delete the hospital "{{ object.name }}"
         </h2>
@@ -14,7 +14,10 @@ static %} {% load crispy_forms_tags %}
         <button class="btn btn-outline-danger" type="submit">
           Yes, Delete
         </button>
-        <a class="btn btn-outline-secondary" href="{% url 'hospital-list'%}"
+        <a
+          style="margin:0 auto;"
+          class="mt-2 btn btn-outline-secondary"
+          href="{% url 'hospital-list'%}"
           >Cancel</a
         >
       </div>
