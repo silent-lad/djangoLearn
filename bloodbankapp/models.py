@@ -17,6 +17,9 @@ class Profile(models.Model):
     weight = models.IntegerField(null=True, blank=True)
     bloodGroup = models.CharField(max_length=3, null=True, blank=True)
 
+    def get_absolute_url(self):
+        return f'/profile/update/{self.id}'
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

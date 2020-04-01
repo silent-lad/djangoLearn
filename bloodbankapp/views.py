@@ -222,10 +222,19 @@ class AppointmentUpdateView(LoginRequiredMixin, CreateView):
     form_class = AppointmentForm
 
     def form_valid(self, form):
+        self.object = self.get_object()
         form.instance.user = self.request.user
-        hospitalid = self.kwargs['hospitalid']
+        hospitalid = self.object.hospitalid
         form.instance.hospital = Hospital.objects.filter(id=hospitalid).first()
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.object = self.get_object()
+        hospitalObject = self.object.hospital
+        context["hospital"] = hospitalObject
+        context["isUpdate"] = True
+        return context
 
     def test_func(self):
         appointment = self.get_object()
