@@ -217,7 +217,7 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
         return False
 
 
-class AppointmentUpdateView(LoginRequiredMixin, CreateView):
+class AppointmentUpdateView(LoginRequiredMixin, UpdateView):
     model = Appointment
     form_class = AppointmentForm
 
