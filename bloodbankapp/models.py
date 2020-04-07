@@ -14,6 +14,11 @@ class Profile(models.Model):
     GENDER_CHOICES = [(GENDER_MALE, 'Male'), (GENDER_FEMALE, 'Female')]
     gender = models.IntegerField(choices=GENDER_CHOICES, default=0)
     age = models.IntegerField(null=True, blank=True)
+    WEIGHT_ABOVE_50 = 1
+    WEIGHT_BELOW_50 = 0
+    WEIGHT_CHOICES = [(WEIGHT_BELOW_50, 'Above 50'),
+                      (WEIGHT_ABOVE_50, 'Below 50')]
+    weight_option = models.IntegerField(choices=WEIGHT_CHOICES, default=1)
     weight = models.IntegerField(null=True, blank=True)
     bloodGroup = models.CharField(max_length=3, null=True, blank=True)
 
