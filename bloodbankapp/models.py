@@ -54,7 +54,8 @@ class Appointment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date = models.CharField(max_length=100, null=True)
-    time = models.CharField(default='00:00:00', max_length=100, null=True)
+    SLOT_CHOICES = []
+    time = models.IntegerField(choices=SLOT_CHOICES, default=1)
 
     def get_absolute_url(self):
         return '/appointments'

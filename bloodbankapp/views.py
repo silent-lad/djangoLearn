@@ -189,14 +189,23 @@ class AppointmentListView(ListView):
 
 
 class AppointmentForm(forms.ModelForm):
-    time = forms.TimeField(
-        label='Time',
-        widget=forms.widgets.TimeInput(attrs={'type': 'time'}),
-    )
+    time = forms.ChoiceField()
     date = forms.DateField(
         label='Date',
         widget=forms.widgets.DateInput(attrs={'type': 'date'}),
     )
+
+    def __init__(self, *args, **kwargs):
+        hospital = kwargs.pop('hospital')
+        super(AppointmentForm, self).__init__(*args, **kwargs)
+        # Now you can make it dynamic.
+        choices = (
+            ('audi', 'Audi'),
+            ('tesla', 'Tesla')
+        )
+        print(hospital.working_hours)
+
+        self.fields.get('time').choices = choices
 
     class Meta:
         model = Appointment
@@ -206,6 +215,13 @@ class AppointmentForm(forms.ModelForm):
 class AppointmentCreateView(LoginRequiredMixin, CreateView):
     model = Appointment
     form_class = AppointmentForm
+
+    def get_form_kwargs(self):
+        kwargs = super(AppointmentCreateView, self).get_form_kwargs()
+        hospitalid = self.kwargs['hospitalid']
+        kwargs.update(
+            {'hospital': Hospital.objects.filter(id=hospitalid).first()})
+        return kwargs
 
     def form_valid(self, form):
         form.instance.user = self.request.user
