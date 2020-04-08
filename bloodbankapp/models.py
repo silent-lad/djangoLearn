@@ -19,7 +19,6 @@ class Profile(models.Model):
     WEIGHT_CHOICES = [(WEIGHT_BELOW_50, 'Above 50'),
                       (WEIGHT_ABOVE_50, 'Below 50')]
     weight_option = models.IntegerField(choices=WEIGHT_CHOICES, default=1)
-    weight = models.IntegerField(null=True, blank=True)
     bloodGroup = models.CharField(max_length=3, null=True, blank=True)
 
     def get_absolute_url(self):

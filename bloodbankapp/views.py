@@ -29,7 +29,8 @@ def register(request):
             user.profile.email = form.cleaned_data.get('email')
             user.profile.phone = form.cleaned_data.get('phone')
             user.profile.bloodGroup = form.cleaned_data.get('bloodGroup')
-            user.profile.weight = form.cleaned_data.get('weight')
+            user.profile.weight_option = form.cleaned_data.get('weight')
+            user.profile.gender = form.cleaned_data.get('gender')
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -106,14 +107,23 @@ def informationView(request):
 
 class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
-    fields = ['phone', 'gender', 'weight', 'bloodGroup', 'age']
+    gender = forms.ChoiceField(
+        choices=[(1, 'Male'), (0, 'Female')])
+    # age = forms.IntegerField()
+    weight_option = forms.ChoiceField(
+        choices=[(1, 'Above 50'), (0, 'Below 50')])
+
+    fields = ['phone', 'gender', 'weight',
+              'bloodGroup', 'weight_option', 'age']
 
     def form_valid(self, form):
         # form.instance.user = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
+        # if self.request.user.email == 'blooddonation.app0@gmail.com':
         return True
+        # return False
 
 
 class HospitalListView(ListView):
