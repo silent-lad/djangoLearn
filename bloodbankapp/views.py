@@ -217,15 +217,11 @@ class AppointmentForm(forms.ModelForm):
             if temp_time_minutes >= 60:
                 temp_time_minutes -= 60
                 temp_time_hours += 1
-            print(temp_time_hours)
-            print(temp_time_minutes)
             if temp_time_hours < close_time_hours or temp_time_minutes < close_time_minutes:
                 choices = choices + ((convertTo12Hr(temp_time_hours, temp_time_minutes),
                                       convertTo12Hr(temp_time_hours, temp_time_minutes)),)
-                print(choices)
             else:
                 break
-        print(hospital.working_hours)
 
         self.fields.get('time').choices = choices
 
@@ -268,6 +264,12 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
 class AppointmentUpdateView(LoginRequiredMixin, UpdateView):
     model = Appointment
     form_class = AppointmentForm
+
+    def get_form_kwargs(self):
+        kwargs = super(AppointmentUpdateView, self).get_form_kwargs()
+        kwargs.update(
+            {'hospital': self.object.hospital})
+        return kwargs
 
     def form_valid(self, form):
         self.object = self.get_object()
