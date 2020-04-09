@@ -17,6 +17,7 @@ from django.views.generic import (
 )
 from .models import Hospital, Appointment, Profile, User
 from datetime import datetime
+from bloodbankapp.timeConversion import convertTo24Hr, convertTo12Hr
 
 
 def register(request):
@@ -199,10 +200,31 @@ class AppointmentForm(forms.ModelForm):
         hospital = kwargs.pop('hospital')
         super(AppointmentForm, self).__init__(*args, **kwargs)
         # Now you can make it dynamic.
-        choices = (
-            ('audi', 'Audi'),
-            ('tesla', 'Tesla')
-        )
+        choices = ()
+        open_time = hospital.working_hours.split('-')[0]
+        close_time = hospital.working_hours.split('-')[1]
+
+        open_time_hours = convertTo24Hr(open_time)[0]
+        open_time_minutes = convertTo24Hr(open_time)[1]
+
+        close_time_hours = convertTo24Hr(close_time)[0]
+        close_time_minutes = convertTo24Hr(close_time)[1]
+
+        temp_time_hours = open_time_hours
+        temp_time_minutes = open_time_minutes
+        while True:
+            temp_time_minutes += 30
+            if temp_time_minutes >= 60:
+                temp_time_minutes -= 60
+                temp_time_hours += 1
+            print(temp_time_hours)
+            print(temp_time_minutes)
+            if temp_time_hours < close_time_hours or temp_time_minutes < close_time_minutes:
+                choices = choices + ((convertTo12Hr(temp_time_hours, temp_time_minutes),
+                                      convertTo12Hr(temp_time_hours, temp_time_minutes)),)
+                print(choices)
+            else:
+                break
         print(hospital.working_hours)
 
         self.fields.get('time').choices = choices
