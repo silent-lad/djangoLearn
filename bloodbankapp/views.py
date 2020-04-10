@@ -30,7 +30,7 @@ def register(request):
             user.profile.email = form.cleaned_data.get('email')
             user.profile.phone = form.cleaned_data.get('phone')
             user.profile.bloodGroup = form.cleaned_data.get('bloodGroup')
-            user.profile.weight_option = form.cleaned_data.get('weight')
+            user.profile.weight_option = form.cleaned_data.get('weight_option')
             user.profile.gender = form.cleaned_data.get('gender')
             user.save()
             raw_password = form.cleaned_data.get('password1')

@@ -16,7 +16,8 @@ class UserRegisterForm(UserCreationForm):
     bloodGroup = forms.CharField(max_length=3)
 
     def clean_weight_option(self):
-        weight_option = self.cleaned_data['weight_option'].lower()
+        weight_option = int(self.cleaned_data['weight_option'])
+        print(type(weight_option))
         if weight_option != 1:
             raise ValidationError("Can't donate blood with weight under 50")
         return weight_option
